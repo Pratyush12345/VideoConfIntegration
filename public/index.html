@@ -1,0 +1,220 @@
+<html>
+<head>
+    <meta charset = "utf-8" /> 
+    <title>GuruCool Live Session</title>
+    <meta name= "viewport" >
+    <link rel = "icon" href =  
+    "\assests\splash.jpeg" 
+        type = "image/x-icon"> 
+        
+                <style>
+             .holder{
+                 width: 100%;
+                 height: 100%;
+                 position: relative;
+             }
+            
+             #meet{
+                 width: 100%;
+                 height: 100%;
+             }
+
+             /* #jitsiConferenceFrame0{
+                 zoom: 3;
+             }
+             */
+             .bar{
+                 position: absolute;
+                 top: 0;
+                 left: 0;
+                 width: 80%;
+                 height: 31%;
+                 opacity: 2;
+                 background-color: #474747;
+            }
+
+            .footer{
+                 position: absolute;
+                 bottom: 0;
+                 left: 0;
+                 width: 0%;
+                 height: 0%;
+                 opacity: 2;
+                 background-color: #ffffff;
+            }
+
+            /* @media only screen and (max-width: 650px) {
+                #meet {
+                    height: 105%;
+                    width: 105%;
+                }
+            } */
+                </style>    
+</head>
+<body  >
+        
+    <div class="holder">
+
+    <div class="bar">
+        <center> <a href="https://gurucool.co/" target="blank"><img id="myImg" src="\assests\logo.png" width="80%" height="100%"></a></center>
+    </div>
+    <div id="meet" >
+        
+    </div>
+    <div class="footer">
+    </div>
+
+   </div>      
+<script type="text/javascript" src='https://meet.jit.si/external_api.js'></script>
+<script type="text/javascript">
+function zoom() {
+            document.body.style.zoom = "105%" 
+        }
+
+if ( ( window.innerWidth <= 1000 ) && ( window.innerHeight <= 2000 ) ){
+    //document.body.style.zoom = "150%"
+
+   var xheight= window.innerHeight*0.184
+   var yheight= window.innerHeight*0.753
+    var x = document.getElementsByClassName("bar")
+    x[0].style.width="100%"
+    x[0].style.height= xheight
+    x[0].style.left="0%"
+    var y = document.getElementsByClassName("footer")
+    y[0].style.width="100%"
+    y[0].style.height= yheight
+
+    
+}
+    
+var domain = 'meet.jit.si';
+var queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+var previlagelevel = urlParams.get('previlagelevel'); 
+
+var photourl=urlParams.get('photourl');
+
+var subject=urlParams.get('title');
+
+var displayName= urlParams.get('displayName');
+
+var eventkey= urlParams.get('eventkey');
+
+console.log('????????>>>>>>>')
+console.log(eventkey)
+console.log('????????>>>>>>>')
+var email= urlParams.get('email');
+
+var toolbaroptions, kickoption, disableremoteMute;
+if(previlagelevel==1){
+  toolbaroptions=[
+        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+        'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
+        'etherpad', 'raisehand',
+        'videoquality', 'filmstrip', 'stats',
+        'tileview', 'videobackgroundblur', 'download',  
+    ]
+    kickoption=true; 
+    disableremoteMute= true; 
+}
+else{
+    toolbaroptions=[
+        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+        'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
+        'etherpad', 'sharedvideo',  'raisehand',
+        'videoquality', 'filmstrip', 'invite', 'stats', 'shortcuts',
+        'tileview', 'videobackgroundblur', 'download', 'mute-everyone', 'security'
+    ]
+    kickoption=false;
+    disableremoteMute=false;
+}
+var options = {
+    
+    roomName: 'GuruCoolSession'+eventkey,
+    width: '100%',
+    height: '100%',
+    parentNode: document.querySelector('#meet'),
+    interfaceConfigOverwrite: { 
+
+    DEFAULT_BACKGROUND: '#474747',    
+    DEFAULT_LOGO_URL: '\assests\splash.jpeg',
+    TOOLBAR_BUTTONS: toolbaroptions,
+    TOOLBAR_ALWAYS_VISIBLE: true,
+    DEFAULT_REMOTE_DISPLAY_NAME: displayName,
+    DEFAULT_LOCAL_DISPLAY_NAME: 'me',
+    MAXIMUM_ZOOMING_COEFFICIENT: 3.3,
+    SHOW_JITSI_WATERMARK: false,  
+    JITSI_WATERMARK_LINK: '\assests\splash.jpeg',    
+    // if watermark is disabled by default, it can be shown only for guests
+    SHOW_WATERMARK_FOR_GUESTS: false,
+    SHOW_BRAND_WATERMARK: true,
+    BRAND_WATERMARK_LINK: '\assests\splash.jpeg',
+    SHOW_POWERED_BY: false,
+    SHOW_DEEP_LINKING_IMAGE: false,
+    DISPLAY_WELCOME_PAGE_CONTENT: false,
+    DISPLAY_WELCOME_PAGE_TOOLBAR_ADDITIONAL_CONTENT: false,
+    APP_NAME: 'GuruCool',
+    NATIVE_APP_NAME: 'GuruCool',
+    PROVIDER_NAME: 'GuruCool',
+    PROVIDER_NAME: 'GuruCool',
+    HIDE_INVITE_MORE_HEADER: true,
+    SHOW_PROMOTIONAL_CLOSE_PAGE: false,
+    SUPPORT_URL: '',
+    MOBILE_DOWNLOAD_LINK_ANDROID: 'https://play.google.com/store/apps/details?id=com.VysionTech.gurucool&hl=en&showAllReviews=true',
+    SHOW_DEEP_LINKING_IMAGE: false,
+         },
+
+
+  configOverwrite: { 
+       remoteVideoMenu: {
+         // If set to true the 'Kick out' button will be disabled.
+        disableKick: kickoption,
+     },
+     disableRemoteMute: disableremoteMute,
+     enableWelcomePage: false,
+     startAudioOnly: true,
+     startWithVideoMuted: true,
+     enableClosePage: false,
+    
+       },  
+
+
+    userInfo: {
+        email: email,
+        displayName: displayName
+         },
+    disableDeepLinking: true,          
+    }
+   
+
+var api = new JitsiMeetExternalAPI(domain, options)
+ let iframe = api.getIFrame();
+
+ var ifr = document.getElementById('jitsiConferenceFrame0');
+ console.log(ifr)
+ //ifr.style.transform= "scale(1.45)";
+ //ifr.style.zoom= "50%";
+// ifr.autofocus= true
+// console.log(ifr.scrollTop)
+//".deep-linking-mobile__button deep-linking-mobile__button_primary"
+
+api.executeCommand('subject', subject);
+api.executeCommand('avatarUrl', photourl);
+
+api.addEventListener('readyToClose', (obj)=>{
+    window.close()
+});
+api.addEventListener('videoConferenceJoined', (obj)=>{
+    var x = document.getElementsByClassName("bar")
+    x[0].style.width="20%"
+    x[0].style.height="20%"
+    var y = document.getElementsByClassName("footer")
+    y[0].style.width="0%"
+    y[0].style.height="0%"
+});
+//api.executeCommand('muteEveryone');
+    
+</script>
+</body>
+</html>
